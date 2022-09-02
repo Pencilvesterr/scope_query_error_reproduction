@@ -1,0 +1,46 @@
+[[rules]]
+name = "delete_boolean_flag_declaration_in_class"
+query = """(
+ (class_declaration
+ 	name: (identifier)
+  	body: (class_body 
+     (field_declaration
+      declarator: (variable_declarator
+       name: (identifier) @boolean_flag_constant
+       value: (object_creation_expression
+        type: (type_identifier) @constructor
+        arguments: (argument_list (
+         (string_literal) @argument
+        ))
+       )
+      ) 
+    ) @rollout_flag_declaration
+  )
+ ) 
+ (#match? @constructor "RolloutFlag$|BooleanFlag$")
+ (#eq? @argument "\\"@flag_key_to_delete\\"")
+)"""
+replace_node = "rollout_flag_declaration"
+replace = ""
+groups = ["delete_boolean_flag_constant"]
+holes = ["flag_key_to_delete"]
+
+
+[[rules]]
+name = "rule_with_no_match"
+query = """(
+ (method_invocation
+   name: (_) @first_method_name
+   arguments: (argument_list (
+    (_) @first_argument
+   )
+  )
+ ) @first_method
+
+ (#eq? @first_argument "FLAG_TO_DELETE")
+)"""
+replace_node = "@first_method"
+replace = ""
+groups = []
+holes = ["boolean_flag_constant"]
+

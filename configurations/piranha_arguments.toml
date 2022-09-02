@@ -1,0 +1,4 @@
+language = ["java"]
+substitutions = [
+    ["flag_key_to_delete", "TEST_FF_KEY"]
+]
