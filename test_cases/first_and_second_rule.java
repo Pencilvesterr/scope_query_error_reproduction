@@ -1,4 +1,4 @@
-// Lines 7 & 9 are deleted when the edge is global
+// Lines 7 & 10 are deleted when the edge is global
 package com.atlassian.rdbms.dbimportexport.runner.impl;
 
 import com.a.b.c.RolloutFlag;
