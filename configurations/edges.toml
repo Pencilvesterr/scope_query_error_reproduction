@@ -1,5 +1,5 @@
 [[edges]]
-scope = "Global"
+scope = "Class"
 from = "delete_boolean_flag_constant"
 to = ["rule_with_no_match"]
 
